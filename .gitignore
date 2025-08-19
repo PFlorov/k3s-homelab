@@ -1,0 +1,54 @@
+# Operating System files
+.DS_Store
+.Trash/
+
+# Log files
+*.log
+logs/
+var/log/
+
+# Temporary files
+*.tmp
+*~ # Editor backup files
+*.swp # Vim swap files
+*.bak # Backup files
+
+# Sensitive credentials and configuration files
+*.key
+*.pem
+*.crt
+*.kubeconfig # Custom extension for kubeconfig files
+id_rsa*      # SSH private keys
+.ssh/        # Entire SSH directory
+.env         # Environment variables files (e.g., for Docker Compose)
+.vault-pass # Ansible vault password files
+
+# Kubernetes/Containerization Specific
+kubeconfig* # Specific kubeconfig filenames
+.kube/      # Local kubectl config directory
+volumes/    # Local persistent volumes or data directories
+data/       # Generic data directories
+tmp/        # Temporary directories
+output/     # Build output directories
+
+# Downloaded ISOs or large binaries
+*.iso
+*.img
+downloads/
+
+# Python specific
+__pycache__/
+*.pyc
+.venv/
+venv/
+
+# Node.js specific
+node_modules/
+npm-debug.log
+.env.local
+
+# IDE and Editor specific files
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
