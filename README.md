@@ -53,7 +53,7 @@ I'm running a lightweight Kubernetes distribution for container orchestration.
 *   **Containerization:** Docker, containerd
 *   **Orchestration:** Kubernetes (K3s)
 *   **Networking:** `netplan`, `nmcli`, `ip`, `ufw`, `Tailscale`
-*   **Monitoring:** `htop`, `sensors`, `landscape-sysinfo` (Future: Prometheus, Grafana)
+*   **Monitoring:** `htop`, `sensors`, `landscape-sysinfo`, `Prometheus`, `Grafana`
 *   **Configuration Management:** (Future: Ansible)
 *   **Version Control:** Git, GitHub
 *   **YAML:** For Kubernetes manifests
