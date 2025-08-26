@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-rules-node-alerts
+  labels:
+    app: prometheus
+data:
+  node-down.yml: |
+    groups:
+      - name: node.rules
+        rules:
+          - alert: NodeNotReady
+            expr: kube_node_status_condition{condition="Ready", status="true"} == 0
+            for: 5m
+            labels:
+              severity: critical
+            annotations:
+              summary: "Node {{ $labels.node }} is NotReady"
+              description: "Kubernetes node {{ $labels.node }} has been NotReady for more than 5 minutes. This indicates a potential issue with the node."
