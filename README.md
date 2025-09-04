@@ -16,12 +16,22 @@ This repository documents my ongoing journey in building, optimizing, and experi
 
 ## 💻 The Hardware
 
-My home lab is built on a repurposed old laptop, optimized for 24/7 operation.
+My home lab is built on repurposed old laptops, optimized for 24/7 operation.
 
-*   **Model:** [Toshiba Satellite P50-A-11L]
+### Master/Worker Node 1
+
+*   **Model:** Toshiba Satellite P50-A-11L
 *   **CPU:** Intel Core i7-4700MQ (4 cores, 8 threads)
-*   **RAM:** [Upgrade in Progress/Completed: From 8GB to 16GB DDR3L-1600MHz SO-DIMM]
-*   **Storage:** [Upgrade in Progress/Completed: From 1TB HDD to 500GB Samsung 870 EVO SATA SSD]
+*   **RAM:** 16GB DDR3L-1600MHz SO-DIMM
+*   **Storage:** 500GB Samsung 870 EVO SATA SSD
+*   **Network:** Wired Gigabit Ethernet (static IP)
+
+### Worker Node 2
+
+*   **Model:** Acer Aspire 5738Z
+*   **CPU:** Intel Pentium T4300 (2 cores, 2 threads)
+*   **RAM:** 4GB DDR2-800MHz SO-DIMM / Plan for Upgrade [Depending on cost]
+*   **Storage:** 1TB HDD / Plan for Upgrade to SSD
 *   **Network:** Wired Gigabit Ethernet (static IP)
 
 ---
@@ -42,9 +52,8 @@ Ensuring reliable and secure access to my server is crucial.
 I'm running a lightweight Kubernetes distribution for container orchestration.
 
 *   **Distribution:** [K3s](https://k3s.io/) (v1.33.3+k3s1) - Chosen for its minimal resource footprint and ease of management on bare-metal.
-*   **Nodes:** 1 (initial master/worker node - the Toshiba laptop itself)
-    *   *Future Plans: Add more physical worker nodes (e.g., thin clients like HP T520/T620) to expand the cluster.*
-
+*   **Nodes:** 2 (initial master/worker node - the Toshiba laptop, and a new worker node - the Acer laptop)
+*   **Future Plans:** Add more physical worker nodes (e.g., thin clients like HP T520/T620) to expand the cluster further.
 ---
 
 ## 🛠️ Key Technologies & Tools I'm Using/Learning
