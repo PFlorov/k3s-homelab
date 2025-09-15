@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cloudflared-config
+  namespace: cloudflared
+data:
+  config.yaml: |
+    tunnel: 97d5254b-3dce-4d1b-bb97-d03b0249a2f7
+    credentials-file: /etc/cloudflared/credentials.json
+
+    ingress:
+      - hostname: nginx.k3s-homelab.org
+        service: http://traefik.kube-system.svc.cluster.local:80
+
+      - hostname: grafana.k3s-homelab.org
+        service: http://traefik.kube-system.svc.cluster.local:80
+
+      - hostname: prometheus.k3s-homelab.org
+        service: http://traefik.kube-system.svc.cluster.local:80
+
+      - service: http_status:404

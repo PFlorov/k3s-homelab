@@ -6,7 +6,7 @@ metadata:
     ingress.kubernetes.io/ssl-redirect: "false"
 spec:
   rules:
-    - host: k3s-control-plane
+    - host: nginx.k3s-homelab.org
       http:
         paths:
           - path: /
