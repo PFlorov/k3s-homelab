@@ -3,7 +3,11 @@ kind: Ingress
 metadata:
   name: nginx-ingress
   annotations:
-    ingress.kubernetes.io/ssl-redirect: "false"
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/entrypoints.web.http.redirections.entrypoint.to: websecure
+    traefik.ingress.kubernetes.io/entrypoints.web.http.redirections.entrypoint.scheme: https
 spec:
   rules:
     - host: nginx.k3s-homelab.org
@@ -16,3 +20,7 @@ spec:
                 name: nginx-service
                 port:
                   number: 80
+  tls:
+    - hosts:
+        - nginx.k3s-homelab.org
+      secretName: nginx-tls-secret

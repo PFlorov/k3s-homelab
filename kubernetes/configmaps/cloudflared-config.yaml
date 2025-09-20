@@ -11,11 +11,17 @@ data:
     ingress:
       - hostname: nginx.k3s-homelab.org
         service: http://traefik.kube-system.svc.cluster.local:80
+        originRequest:
+          originServerName: nginx.k3s-homelab.org
 
       - hostname: grafana.k3s-homelab.org
         service: http://traefik.kube-system.svc.cluster.local:80
+        originRequest:
+          originServerName: grafana.k3s-homelab.org
 
       - hostname: prometheus.k3s-homelab.org
         service: http://traefik.kube-system.svc.cluster.local:80
+        originRequest:
+          originServerName: prometheus.k3s-homelab.org
 
       - service: http_status:404
