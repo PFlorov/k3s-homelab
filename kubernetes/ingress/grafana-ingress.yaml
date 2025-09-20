@@ -22,5 +22,5 @@ spec:
                   name: http-grafana
   tls:
     - hosts:
-        - prometheus.k3s-homelab.org
-      secretName: prometheus-tls-secret
+        - grafana.k3s-homelab.org
+      secretName: grafana-tls-secret
