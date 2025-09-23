@@ -5,7 +5,6 @@ metadata:
   namespace: cloudflared
 data:
   config.yaml: |
-    tunnel: 97d5254b-3dce-4d1b-bb97-d03b0249a2f7
     credentials-file: /etc/cloudflared/credentials.json
 
     ingress:
