@@ -8,6 +8,15 @@ data:
     credentials-file: /etc/cloudflared/credentials.json
 
     ingress:
+      - hostname: home.k3s-homelab.org
+        path: /.well-known/acme-challenge/*
+        service: http://cm-acme-http-solver-dl4zh.glance.svc.cluster.local:8089
+
+      - hostname: home.k3s-homelab.org
+        service: https://traefik.kube-system.svc.cluster.local:443
+        originRequest:
+          originServerName: home.k3s-homelab.org
+
       - hostname: nginx.k3s-homelab.org
         service: https://traefik.kube-system.svc.cluster.local:443
         originRequest:
@@ -21,6 +30,6 @@ data:
       - hostname: prometheus.k3s-homelab.org
         service: https://traefik.kube-system.svc.cluster.local:443
         originRequest:
-          originServerName: prometheus.k3s-homelab.org
+          originServerName: prometheus.k3s-homelab.orgg
 
       - service: http_status:404

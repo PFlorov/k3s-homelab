@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: glance-dash
+  labels:
+    app: glance
+  namespace: glance
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: glance
+  template:
+    metadata:
+      name: glance
+      labels:
+        app: glance
+    spec:
+      containers:
+        - name: glance-dash
+          image: glanceapp/glance:latest
+          ports:
+            - containerPort: 8080
+              name: glance-port
+          volumeMounts:
+            - name: config-volume
+              mountPath: /app/config
+              readOnly: true
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                  - k3s-worker-1
+      volumes:
+        - name: config-volume
+          configMap:
+            name: glance-config
