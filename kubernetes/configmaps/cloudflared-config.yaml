@@ -30,6 +30,6 @@ data:
       - hostname: prometheus.k3s-homelab.org
         service: https://traefik.kube-system.svc.cluster.local:443
         originRequest:
-          originServerName: prometheus.k3s-homelab.orgg
+          originServerName: prometheus.k3s-homelab.org
 
       - service: http_status:404

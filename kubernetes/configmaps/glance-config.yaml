@@ -6,102 +6,51 @@ metadata:
 data:
   glance.yml: |
     pages:
-      - name: Home
+      - name: Homepage
+        width: slim
+        hide-desktop-navigation: true
+        center-vertically: true
         columns:
-          - size: small
-            widgets:
-              - type: calendar
-                first-day-of-week: monday
-
-              - type: rss
-                limit: 10
-                collapse-after: 3
-                cache: 12h
-                feeds:
-                  - url: https://selfh.st/rss/
-                    title: selfh.st
-                    limit: 4
-                  - url: https://ciechanow.ski/atom.xml
-                  - url: https://www.joshwcomeau.com/rss.xml
-                    title: Josh Comeau
-                  - url: https://samwho.dev/rss.xml
-                  - url: https://ishadeed.com/feed.xml
-                    title: Ahmad Shadeed
-
-              - type: twitch-channels
-                channels:
-                  - theprimeagen
-                  - j_blow
-                  - piratesoftware
-                  - cohhcarnage
-                  - christitustech
-                  - EJ_SA
-
           - size: full
             widgets:
-              - type: group
-                widgets:
-                  - type: hacker-news
-                  - type: lobsters
-
-              - type: videos
-                channels:
-                  - UCR-DXc1voovS8nhAvccRZhg # Jeff Geerling
-                  - UCsBjURrPoezykLs9EqgamOA # Fireship
-                  - UCBJycsmduvYEL83R_U4JriQ # Marques Brownlee
-                  - UCHnyfMqiRRG1u-2MsSQLbXA # Veritasium
-
-              - type: group
-                widgets:
-                  - type: reddit
-                    subreddit: technology
-                    show-thumbnails: true
-                  - type: reddit
-                    subreddit: selfhosted
-                    show-thumbnails: true
-
-          - size: small
-            widgets:
-              - type: weather
-                location: Bulgaria, Plovdiv
-                units: metric # alternatively "imperial"
-                hour-format: 24h
-
-              - type: markets
-                markets:
-                  - symbol: SPY
-                    name: S&P 500
-                  - symbol: BTC-USD
-                    name: Bitcoin
-                  - symbol: NVDA
-                    name: NVIDIA
-                  - symbol: AAPL
-                    name: Apple
-                  - symbol: MSFT
-                    name: Microsoft
-
-              - type: releases
-                cache: 1d
-                # Without authentication the Github API allows for up to 60 requests per hour. You can create a
-                # read-only token from your Github account settings and use it here to increase the limit.
-                # token: ...
-                repositories:
-                  - glanceapp/glance
-                  - go-gitea/gitea
-                  - immich-app/immich
-                  - syncthing/syncthing
-
-      # Add more pages here:
-      # - name: Your page name
-      #   columns:
-      #     - size: small
-      #       widgets:
-      #         # Add widgets here
-
-      #     - size: full
-      #       widgets:
-      #         # Add widgets here
-
-      #     - size: small
-      #       widgets:
-      #         # Add widgets here
+              - type: search
+                autofocus: true
+              - type: monitor
+                cache: 1m
+                title: Services
+                sites:
+                   - title: Grafana
+                     url: https://grafana.k3s-homelab.org/
+                     icon: si:grafana
+                   - title: Prometheus
+                     url: https://prometheus.k3s-homelab.org/
+                     icon: si:prometheus
+                   - title: Nginx
+                     url: https://nginx.k3s-homelab.org/
+                     icon: si:nginx
+              - type: bookmarks
+                groups:
+                  - title: General
+                    links:
+                      - title: Gmail
+                        url: https://mail.google.com/mail/u/0/
+                      - title: Amazon
+                        url: https://www.amazon.com/
+                      - title: Github
+                        url: https://github.com/
+                  - title: Entertainment
+                    links:
+                      - title: YouTube
+                        url: https://www.youtube.com/
+                      - title: Prime Video
+                        url: https://www.primevideo.com/
+                      - title: Disney+
+                        url: https://www.disneyplus.com/
+                  - title: Social
+                    links:
+                      - title: Reddit
+                        url: https://www.reddit.com/
+                      - title: Twitter
+                        url: https://twitter.com/
+                      - title: Instagram
+                        url: https://www.instagram.com/
