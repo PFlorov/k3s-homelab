@@ -1,16 +1,16 @@
 #!/usr/bin/env python3
 
-from kubernetes import client, config
+# from kubernetes import client, config
 import os
 import sys
 import yaml
 
 all_manifests_content = []
 
-KUBECONFIG_FILEPATH = "/etc/rancher/k3s/k3s.yaml"
-config.load_kube_config(config_file=KUBECONFIG_FILEPATH)
+# KUBECONFIG_FILEPATH = "/etc/rancher/k3s/k3s.yaml"
+# config.load_kube_config(config_file=KUBECONFIG_FILEPATH)
 
-api = client.CoreV1Api()
+# api = client.CoreV1Api()
 
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -47,3 +47,17 @@ for raw_yaml_string in all_manifests_content:
                     'full_manifest': doc
                 })
 print(f"Successfully parsed {len(all_parsed_manifests)} Kubernetes resources.")
+
+order_of_manifests = ['Namespace', 'ConfigMap', 'Secret', 'SealedSecret', 'PersistentVolume',
+                      'PersistentVolumeClaim', 'ServiceAccount', 'ClusterRole', 'ClusterRoleBinding',
+                      'Deployment', 'DaemonSet', 'Service', 'Ingress', 'ClusterIssuer', ]
+
+grouped_manifests = {kind: [] for kind in order_of_manifests}
+
+for manifest_info in all_parsed_manifests:
+    kind = manifest_info['kind']
+    if kind in grouped_manifests:
+        grouped_manifests[kind].append(manifest_info['full_manifest'])
+    else:
+        print(
+            f"resource of kind '{kind}' found but in defined order_of_manifests. Skipping", file=sys.stderr)
