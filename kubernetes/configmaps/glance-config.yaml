@@ -28,6 +28,9 @@ data:
                    - title: Nginx
                      url: https://nginx.k3s-homelab.org/
                      icon: si:nginx
+                   - title: Blog
+                     url: https://blog.k3s-homelab.org/
+                     icon: si:blogger
               - type: bookmarks
                 groups:
                   - title: General
