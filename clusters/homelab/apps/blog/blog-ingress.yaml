@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: blog-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/entrypoints.web.http.redirections.entrypoint.to: websecure
+    traefik.ingress.kubernetes.io/entrypoints.web.http.redirections.entrypoint.scheme: https
+spec:
+  ingressClassName: traefik
+  rules:
+    - host: blog.k3s-homelab.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: hugo-blog-service
+                port:
+                  name: http-blog
+  tls:
+    - hosts:
+        - blog.k3s-homelab.org
+      secretName: blog-tls-secret
