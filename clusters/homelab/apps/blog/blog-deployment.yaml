@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: hugo-blog
-          image: ghcr.io/pflorov/devops-blog:93e6da20e8215aab34b38ba8c1b7fc65c584219d
+          image: ghcr.io/pflorov/devops-blog:0e347cb532d5bf4b78b772cb51e6cd8f353ac6f9
           ports:
             - containerPort: 80
           resources:
