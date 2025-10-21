@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
         - name: hugo-blog
-          image: nginx:latest
+          image: ghcr.io/pflorov/devops-blog:96150be3ba9faa07ed4c456dfe17500850e11404
           ports:
             - containerPort: 80
           resources:
