@@ -206,7 +206,3 @@ This is a personal learning project, but feel free to open an issue if you have 
 This project is open-source under the MIT License.
 
 ---
-
-## 📝 License
-
-This project is open-source under the [MIT License](LICENSE).
