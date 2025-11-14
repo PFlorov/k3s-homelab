@@ -8,9 +8,6 @@ data:
     credentials-file: /etc/cloudflared/credentials.json
 
     ingress:
-      - hostname: shrt.k3s-homelab.org
-        path: /.well-known/acme-challenge/*
-        service: http://cm-acme-http-solver-dl4zh.glance.svc.cluster.local:8089
 
       - hostname: shrt.k3s-homelab.org
         service: https://traefik.kube-system.svc.cluster.local:443
