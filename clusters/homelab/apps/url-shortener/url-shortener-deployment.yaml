@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
         - name: url-shortener
-          image: ghcr.io/pflorov/k3s-url-shortener-app:latest-${{ sha-dc0d978 }}
+          image: ghcr.io/pflorov/k3s-url-shortener-app:sha-dc0d978
           imagePullPolicy: Always
           ports:
             - containerPort: 5000
