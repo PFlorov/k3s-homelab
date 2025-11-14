@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: url-shortener
+  namespace: default
+  annotations:
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: web,websecure
+    traefik.ingress.kubernetes.io/router.tls: "true"
+    traefik.ingress.kubernetes.io/entrypoints.web.http.redirections.entrypoint.to: websecure
+    traefik.ingress.kubernetes.io/entrypoints.web.http.redirections.entrypoint.scheme: https
+  labels:
+    app: url-shortener
+spec:
+  tls:
+    - hosts:
+        - shrt.k3s-homelab.org
+      secretName: shrt-tls-secret
+  rules:
+    - host: shrt.k3s-homelab.org
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: url-shortener-service
+                port:
+                  name: http
