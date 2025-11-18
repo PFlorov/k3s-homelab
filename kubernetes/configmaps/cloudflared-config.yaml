@@ -10,6 +10,10 @@ data:
     ingress:
 
       - hostname: shrt.k3s-homelab.org
+        path: /.well-known/acme-challenge/*
+        service: http://cm-acme-http-solver-d8g8n.default.svc.cluster.local:8089
+
+      - hostname: shrt.k3s-homelab.org
         service: https://traefik.kube-system.svc.cluster.local:443
         originRequest:
           originServerName: shrt.k3s-homelab.org
