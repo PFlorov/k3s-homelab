@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pihole
+  namespace: default
+  labels:
+    app: pihole
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pihole
+  template:
+    metadata:
+      labels:
+        app: pihole
+    spec:
+      containers:
+        - name: pihole
+          image: pihole/pihole:latest
+          ports:
+            - containerPort: 53
+              name: dns-udp
+              protocol: UDP
+            - containerPort: 53
+              name: dns-tcp
+              protocol: TCP
+            - containerPort: 80
+              name: webui
+          envFrom:
+            - secretRef:
+                name: pihole-secret
+          env:
+            - name: TZ
+              value: "Europe/Helsinki"
+          volumeMounts:
+            - name: pihole-config-volume
+              mountPath: /etc/pihole
+            - name: pihole-dnsmasq-volume
+              mountPath: /etc/dnsmasq.d
+      volumes:
+        - name: pihole-config-volume
+          persistentVolumeClaim:
+            claimName: pihole-data
+        - name: pihole-dnsmasq-volume
+          emptyDir: {}
