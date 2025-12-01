@@ -2,7 +2,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: pihole-data
-  nemespace: default
+  namespace: default
 spec:
   accessModes:
     - ReadWriteOnce
