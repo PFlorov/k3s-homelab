@@ -27,10 +27,12 @@ spec:
               protocol: TCP
             - containerPort: 80
               name: webui
-          envFrom:
-            - secretRef:
-                name: pihole-secret
           env:
+            - name: WEBPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pihole-secret
+                  key: WEBPASSWORD
             - name: TZ
               value: "Europe/Helsinki"
           volumeMounts:
