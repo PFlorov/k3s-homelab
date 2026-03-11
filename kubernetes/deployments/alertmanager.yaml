@@ -15,6 +15,27 @@ spec:
       labels:
         app: alertmanager
     spec:
+      initContainers:
+        - name: render-config
+          image: busybox:1.36
+          command:
+            - sh
+            - -c
+            - |
+              WEBHOOK_URL="$(cat /secrets/webhook-url)"
+              sed "s|__DISCORD_WEBHOOK_URL__|${WEBHOOK_URL}|g" \
+                /config-template/config.yml.tmpl \
+                > /etc/alertmanager/config.yml
+          volumeMounts:
+            - name: config-template-volume
+              mountPath: /config-template
+              readOnly: true
+            - name: discord-secret-volume
+              mountPath: /secrets
+              readOnly: true
+            - name: rendered-config-volume
+              mountPath: /etc/alertmanager
+
       containers:
         - name: alertmanager
           image: quay.io/prometheus/alertmanager:v0.27.0
@@ -26,7 +47,7 @@ spec:
               containerPort: 9093
               hostPort: 9093
           volumeMounts:
-            - name: config-volume
+            - name: rendered-config-volume
               mountPath: /etc/alertmanager
             - name: storage
               mountPath: /alertmanager
@@ -38,8 +59,13 @@ spec:
               cpu: 100m
               memory: 100Mi
       volumes:
-        - name: config-volume
+        - name: config-template-volume
           configMap:
-            name: alertmanager-config
+            name: alertmanager-config-template
+        - name: discord-secret-volume
+          secret:
+            secretName: discord-webhook
+        - name: rendered-config-volume
+          emptyDir: {}
         - name: storage
           emptyDir: {}
