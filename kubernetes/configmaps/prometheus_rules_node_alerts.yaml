@@ -5,7 +5,7 @@ metadata:
   labels:
     app: prometheus
 data:
-  pvc-pending.yml: |
+  storage-alerts.yml: |
     groups:
       - name: pvc.rules
         rules:
@@ -18,7 +18,7 @@ data:
               summary: "PVC {{ $labels.persistentvolumeclaim }} is Pending"
               description: "Kubernetes PVC {{ $labels.persistentvolumeclaim }} is in state Pending for more than 5 minutes in {{ $labels.namespace }} namespace."
 
-  node-down.yml: |
+  node-alerts.yml: |
     groups:
       - name: node.rules
         rules:
@@ -30,3 +30,18 @@ data:
             annotations:
               summary: "Node {{ $labels.node }} is NotReady"
               description: "Kubernetes node {{ $labels.node }} has been NotReady for more than 5 minutes. This indicates a potential issue with the node."
+
+  pod-alerts.yml: |
+    groups:
+      - name: pod.rules
+        rules:
+          - alert: PodRestarting
+            expr: increase(kube_pod_container_status_restarts_total[10m]) > 0
+            for: 5m
+            labels:
+              severity: warning
+            annotations:
+              summary: "Pod {{ $labels.pod }} has restarted too recently"
+              description: "Kubernetes pod {{ $labels.pod }} in container {{ $labels.container }} in namespace {{ $labels.namespace }} has restarted one or more times in the last 10 minutes"
+
+
